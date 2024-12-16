@@ -322,7 +322,7 @@ namespace NzbDrone.Common.Extensions
 
         public static string GetLogFolder(this IAppFolderInfo appFolderInfo)
         {
-            return Path.Combine(GetAppDataPath(appFolderInfo), "logs");
+        return appFolderInfo.LogFolder;
         }
 
         public static string GetConfigPath(this IAppFolderInfo appFolderInfo)

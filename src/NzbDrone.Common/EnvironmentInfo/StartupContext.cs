@@ -17,6 +17,7 @@ namespace NzbDrone.Common.EnvironmentInfo
     public class StartupContext : IStartupContext
     {
         public const string APPDATA = "data";
+        public const string DIR_LOG = "log";
         public const string NO_BROWSER = "nobrowser";
         internal const string INSTALL_SERVICE = "i";
         internal const string UNINSTALL_SERVICE = "u";

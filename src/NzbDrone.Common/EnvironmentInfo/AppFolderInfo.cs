@@ -9,6 +9,7 @@ namespace NzbDrone.Common.EnvironmentInfo
     public interface IAppFolderInfo
     {
         string AppDataFolder { get; }
+        string LogFolder { get; }
         string LegacyAppDataFolder { get; }
         string TempFolder { get; }
         string StartUpFolder { get; }
@@ -38,11 +39,22 @@ namespace NzbDrone.Common.EnvironmentInfo
                 LegacyAppDataFolder = Path.Combine(Environment.GetFolderPath(_dataSpecialFolder, Environment.SpecialFolderOption.DoNotVerify), "NzbDrone");
             }
 
+            if (startupContext.Args.ContainsKey(StartupContext.LOG_DIR))
+            {
+                LogFolder = startupContext.Args[StartupContext.LOG_DIR];
+                Logger.Info("Data directory is being overridden to [{0}]", LogFolder);
+            }
+            else
+            {
+                LogFolder = Path.Combine(AppDataFolder, "logs");
+            }
+
             StartUpFolder = new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.FullName;
             TempFolder = Path.GetTempPath();
         }
 
         public string AppDataFolder { get; }
+        public string LogFolder { get; }
         public string LegacyAppDataFolder { get; }
         public string StartUpFolder { get; }
         public string TempFolder { get; }
